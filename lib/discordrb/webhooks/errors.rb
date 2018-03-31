@@ -5,7 +5,7 @@ module Discordrb::Webhooks
   module Errors
     # Raised when an Embed doesn't meet certain formatting criteria
     class EmbedFormatError < RuntimeError; end
-   
+
     # Raised when a Client tries to execute a webhook with too many embed objects attached
     class TooManyEmbeds < RuntimeError
       # Default message for this exception

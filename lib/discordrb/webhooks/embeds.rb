@@ -26,10 +26,7 @@ module Discordrb::Webhooks
     MAXIMUM_FIELD_VALUE_LENGTH = 1024
 
     # Maximum total accounted length
-    MAXIMUM_LENGTH = 4000
-
-    # Snapcase's power level
-    SNAPCASE_POWER_LEVEL = 9001
+    MAXIMUM_LENGTH = 6000
 
     def initialize(title: nil, description: nil, url: nil, timestamp: nil, colour: nil, color: nil, footer: nil,
                    image: nil, thumbnail: nil, video: nil, provider: nil, author: nil, fields: [], check_format: true)
@@ -196,6 +193,8 @@ module Discordrb::Webhooks
           f = f.to_hash
           errors << "Field at index #{i}: field[:name] too long (#{f[:name].length}/#{MAXIMUM_FIELD_NAME_LENGTH})" if f[:name].length > MAXIMUM_FIELD_NAME_LENGTH
           errors << "Field at index #{i}: field[:value] too long (#{f[:value].length}/#{MAXIMUM_FIELD_VALUE_LENGTH})" if f[:value].length > MAXIMUM_FIELD_NAME_LENGTH
+          errors << "Field at index #{i}: field[:name] is empty" if f[:name].empty?
+          errors << "Field at index #{i}: field[:value] is empty" if f[:value].empty?
         end
       end
 
