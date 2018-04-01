@@ -100,7 +100,7 @@ module Discordrb
     def initialize(
         log_mode: :normal,
         token: nil, client_id: nil,
-        type: nil, name: '', fancy_log: false, suppress_ready: false, parse_self: false,
+        type: :bot, name: '', fancy_log: false, suppress_ready: false, parse_self: false,
         shard_id: nil, num_shards: nil, redact_token: true, ignore_bots: false
     )
 
@@ -116,7 +116,7 @@ module Discordrb
 
       @client_id = client_id
 
-      @type = type || :bot
+      @type = type
       @name = name
 
       @shard_key = num_shards ? [shard_id, num_shards] : nil
@@ -124,8 +124,8 @@ module Discordrb
       LOGGER.fancy = fancy_log
       @prevent_ready = suppress_ready
 
-      @token = process_token(@type, token)
-      @gateway = Gateway.new(self, @token, @shard_key)
+      @token = process_token(type, token)
+      @gateway = Gateway.new(self, token, @shard_key)
 
       init_cache
 
